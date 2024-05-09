@@ -4,7 +4,7 @@ import movierental.presenters.HtmlStatementPresenter;
 import movierental.presenters.StringStatementPresenter;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class CustomerTest {
 
@@ -22,19 +22,19 @@ public class CustomerTest {
         {
             var rentalLine = statement.rentalLines().get(0);
             assertEquals("Jaws", rentalLine.movieTitle());
-            assertEquals(2.0, rentalLine.amount());
+            assertEquals(2.0, rentalLine.amount(), 0.1);
         }
         {
             var rentalLine = statement.rentalLines().get(1);
             assertEquals("Golden Eye", rentalLine.movieTitle());
-            assertEquals(3.5, rentalLine.amount());
+            assertEquals(3.5, rentalLine.amount(), 0.1);
         }
         {
             var rentalLine = statement.rentalLines().get(2);
             assertEquals("Short New", rentalLine.movieTitle());
-            assertEquals(3.0, rentalLine.amount());
+            assertEquals(3.0, rentalLine.amount(), 0.1);
         }
-        assertEquals(8.5, statement.totalAmount());
+        assertEquals(8.5, statement.totalAmount(), 0.1);
         assertEquals(3, statement.totalFrequentRenterPoints());
     }
 
