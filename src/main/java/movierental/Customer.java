@@ -20,28 +20,30 @@ public class Customer {
         Statement statement = new Statement(this.name);
 
         for (Rental rental : rentals) {
-            int frequentRenterPoints = 0;
-            double thisAmount = 0;
-
-            //determine amounts for rental line
-            switch (rental.getMovie().getPriceCode()) {
-                case REGULAR:
-                    thisAmount = evaluateAmountForRegularPrice(rental);
-                    break;
-                case NEW_RELEASE:
-                    thisAmount += evaluateAmountForNewReleasePrice(rental);
-                    break;
-                case CHILDRENS:
-                    thisAmount = evaluateAmountForChildrensPrice(rental);
-                    break;
-            }
-
-            frequentRenterPoints = evaluateFrequentRenterPoints(rental);
-
+            double thisAmount = evaluateAmount(rental);
+            int frequentRenterPoints = evaluateFrequentRenterPoints(rental);
             // show figures for this rental
             statement.addRentalLine(new Statement.RentalLine(rental.getMovie().getTitle(), thisAmount), frequentRenterPoints);
         }//END FOR
         return statement;
+    }
+
+    private static double evaluateAmount(Rental rental) {
+        double thisAmount = 0;
+
+        //determine amounts for rental line
+        switch (rental.getMovie().getPriceCode()) {
+            case REGULAR:
+                thisAmount = evaluateAmountForRegularPrice(rental);
+                break;
+            case NEW_RELEASE:
+                thisAmount += evaluateAmountForNewReleasePrice(rental);
+                break;
+            case CHILDRENS:
+                thisAmount = evaluateAmountForChildrensPrice(rental);
+                break;
+        }
+        return thisAmount;
     }
 
     private static int evaluateFrequentRenterPoints(Rental rental) {
