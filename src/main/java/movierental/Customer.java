@@ -26,17 +26,13 @@ public class Customer {
             //determine amounts for rental line
             switch (rental.getMovie().getPriceCode()) {
                 case REGULAR:
-                    thisAmount += 2;
-                    if (rental.getDaysRented() > 2)
-                        thisAmount += (rental.getDaysRented() - 2) * 1.5;
+                    thisAmount = evaluateAmountForRegularPrice(rental);
                     break;
                 case NEW_RELEASE:
-                    thisAmount += rental.getDaysRented() * 3;
+                    thisAmount += evaluateAmountForNewReleasePrice(rental);
                     break;
                 case CHILDRENS:
-                    thisAmount += 1.5;
-                    if (rental.getDaysRented() > 3)
-                        thisAmount += (rental.getDaysRented() - 3) * 1.5;
+                    thisAmount = evaluateAmountForChildrensPrice(rental);
                     break;
             }
 
@@ -50,6 +46,24 @@ public class Customer {
             statement.addRentalLine(new Statement.RentalLine(rental.getMovie().getTitle(), thisAmount), frequentRenterPoints);
         }//END FOR
         return statement;
+    }
+
+    private static double evaluateAmountForChildrensPrice(Rental rental) {
+        double amount = 1.5;
+        if (rental.getDaysRented() > 3)
+            amount += (rental.getDaysRented() - 3) * 1.5;
+        return amount;
+    }
+
+    private static int evaluateAmountForNewReleasePrice(Rental rental) {
+        return rental.getDaysRented() * 3;
+    }
+
+    private static double evaluateAmountForRegularPrice(Rental rental) {
+        double amount = 2;
+        if (rental.getDaysRented() > 2)
+            amount += (rental.getDaysRented() - 2) * 1.5;
+        return amount;
     }
 
 }
