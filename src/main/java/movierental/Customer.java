@@ -36,16 +36,21 @@ public class Customer {
                     break;
             }
 
-            // add frequent renter points
-            frequentRenterPoints++;
-            // add bonus for a two days new release rental
-            if ((rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE) && rental.getDaysRented() > 1)
-                frequentRenterPoints++;
+            frequentRenterPoints = evaluateFrequentRenterPoints(rental);
 
             // show figures for this rental
             statement.addRentalLine(new Statement.RentalLine(rental.getMovie().getTitle(), thisAmount), frequentRenterPoints);
         }//END FOR
         return statement;
+    }
+
+    private static int evaluateFrequentRenterPoints(Rental rental) {
+        // add frequent renter points
+        int frequentRenterPoints = 1;
+        // add bonus for a two days new release rental
+        if ((rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE) && rental.getDaysRented() > 1)
+            frequentRenterPoints++;
+        return frequentRenterPoints;
     }
 
     private static double evaluateAmountForChildrensPrice(Rental rental) {
