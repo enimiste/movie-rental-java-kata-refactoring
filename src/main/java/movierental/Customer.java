@@ -5,19 +5,19 @@ import java.util.List;
 
 public class Customer {
 
-    private String _name;
-    private List<Rental> _rentals = new ArrayList<Rental>();
+    private String name;
+    private List<Rental> rentals = new ArrayList<Rental>();
 
     public Customer(String name) {
-        _name = name;
+        this.name = name;
     }
 
     public void addRental(Rental arg) {
-        _rentals.add(arg);
+        rentals.add(arg);
     }
 
     public String getName() {
-        return _name;
+        return name;
     }
 
     public String statement() {
@@ -25,7 +25,7 @@ public class Customer {
         int frequentRenterPoints = 0;
         String result = "Rental Record for " + getName() + "\n";
 
-        for (Rental each : _rentals) {
+        for (Rental each : rentals) {
             double thisAmount = 0;
 
             //determine amounts for each line
