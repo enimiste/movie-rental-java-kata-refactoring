@@ -2,6 +2,7 @@ package movierental;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
+import movierental.presenters.StringStatementPresenter;
 import org.junit.Test;
 
 public class CustomerTest {
@@ -14,7 +15,7 @@ public class CustomerTest {
         customer.addRental(new Rental(new Movie("Golden Eye", Movie.PriceCode.REGULAR), 3));
         customer.addRental(new Rental(new Movie("Short New", Movie.PriceCode.NEW_RELEASE), 1));
 
-        Customer.Statement statement = customer.calculateStatement();
+        Statement statement = customer.statement();
         assertEquals("Bob", statement.customerName());
         assertEquals(3, statement.rentalLines().size());
         {
@@ -46,6 +47,7 @@ public class CustomerTest {
         customer.addRental(new Rental(new Movie("Bambi", Movie.PriceCode.CHILDRENS), 3));
         customer.addRental(new Rental(new Movie("Toy Story", Movie.PriceCode.CHILDRENS), 4));
 
+        StringStatementPresenter stringStatementPresenter = new StringStatementPresenter();
         String expected = "" +
                 "Rental Record for Bob\n" +
                 "\tJaws\t2.0\n" +
@@ -57,7 +59,7 @@ public class CustomerTest {
                 "Amount owed is 19.0\n" +
                 "You earned 7 frequent renter points";
 
-        assertEquals(expected, customer.statement());
+        assertEquals(expected, stringStatementPresenter.present(customer.statement()));
     }
 
 }

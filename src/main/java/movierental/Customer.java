@@ -1,7 +1,6 @@
 package movierental;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Customer {
@@ -21,57 +20,7 @@ public class Customer {
         return name;
     }
 
-    static class Statement {
-        private final String customerName;
-        private double totalAmount=0;
-        private int totalFrequentRenterPoints;
-        private final List<RentalLine> rentalLines=new ArrayList<>();
-
-        Statement(String customerName) {
-            this.customerName = customerName;
-        }
-
-        void addRentalLine(RentalLine rentalLine, int frequentRenterPoints){
-            this.rentalLines.add(rentalLine);
-            this.totalAmount+=rentalLine.amount;
-            this.totalFrequentRenterPoints += frequentRenterPoints;
-        }
-
-        public String customerName() {
-            return customerName;
-        }
-
-        public double totalAmount() {
-            return totalAmount;
-        }
-
-        public List<RentalLine> rentalLines() {
-            return Collections.unmodifiableList(rentalLines);
-        }
-
-        public int totalFrequentRenterPoints() {
-            return totalFrequentRenterPoints;
-        }
-
-        static class RentalLine {
-            private final String movieTitle;
-            private final double amount;
-
-            private RentalLine(String movieTitle, double amount) {
-                this.movieTitle = movieTitle;
-                this.amount = amount;
-            }
-
-            public double amount() {
-                return amount;
-            }
-
-            public String movieTitle() {
-                return movieTitle;
-            }
-        }
-    }
-    Statement calculateStatement() {
+    Statement statement() {
         Statement statement = new Statement(this.name);
 
         for (Rental rental : rentals) {
@@ -107,30 +56,4 @@ public class Customer {
         return statement;
     }
 
-    public String statement() {
-        Statement statement = calculateStatement();
-        String result = makeStatementHeader(statement.customerName());
-
-        for (Statement.RentalLine rental : statement.rentalLines()) {
-            result += makeStatementRentalLine(rental.movieTitle(), rental.amount());
-        }
-
-        // add footer lines
-        result += makeStatementFooter(statement.totalAmount(), statement.totalFrequentRenterPoints());
-
-        return result;
-    }
-
-    private static String makeStatementFooter(double totalAmount, int frequentRenterPoints) {
-        return "Amount owed is " + totalAmount + "\n" +
-                "You earned " + frequentRenterPoints + " frequent renter points";
-    }
-
-    private static String makeStatementRentalLine(String rentalMovieTitle, double amount) {
-        return "\t" + rentalMovieTitle+ "\t" + amount + "\n";
-    }
-
-    private static String makeStatementHeader(String customerName) {
-        return "Rental Record for " + customerName + "\n";
-    }
 }
