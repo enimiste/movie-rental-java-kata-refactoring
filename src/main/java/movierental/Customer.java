@@ -18,13 +18,11 @@ public class Customer {
 
     Statement statement() {
         Statement statement = new Statement(this.name);
-
-        for (Rental rental : rentals) {
-            double thisAmount = evaluateAmount(rental);
-            int frequentRenterPoints = evaluateFrequentRenterPoints(rental);
-            // show figures for this rental
-            statement.addRentalLine(new Statement.RentalLine(rental.getMovie().getTitle(), thisAmount), frequentRenterPoints);
-        }//END FOR
+        rentals.forEach(rental -> {
+                    double thisAmount = evaluateAmount(rental);
+                    int frequentRenterPoints = evaluateFrequentRenterPoints(rental);
+                    statement.addRentalLine(new Statement.RentalLine(rental.getMovie().getTitle(), thisAmount), frequentRenterPoints);
+                });
         return statement;
     }
 
