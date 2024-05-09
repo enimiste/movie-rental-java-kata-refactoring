@@ -16,10 +16,6 @@ public class Customer {
         rentals.add(arg);
     }
 
-    public String getName() {
-        return name;
-    }
-
     Statement statement() {
         Statement statement = new Statement(this.name);
 
