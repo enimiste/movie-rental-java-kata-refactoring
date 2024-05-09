@@ -23,7 +23,7 @@ public class Customer {
     public String statement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        String result = "Rental Record for " + getName() + "\n";
+        String result = makeStatementHeader(this.name);
 
         for (Rental rental : rentals) {
             double thisAmount = 0;
@@ -47,19 +47,31 @@ public class Customer {
 
             // add frequent renter points
             frequentRenterPoints++;
-            // add bonus for a two day new release rental
+            // add bonus for a two days new release rental
             if ((rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE) && rental.getDaysRented() > 1)
                 frequentRenterPoints++;
 
             // show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
+            result += makeStatementRentalLine(rental.getMovie().getTitle(), thisAmount);
             totalAmount += thisAmount;
         }
 
         // add footer lines
-        result += "Amount owed is " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points";
+        result += makeStatementFooter(totalAmount, frequentRenterPoints);
 
         return result;
+    }
+
+    private static String makeStatementFooter(double totalAmount, int frequentRenterPoints) {
+        return "Amount owed is " + totalAmount + "\n" +
+                "You earned " + frequentRenterPoints + " frequent renter points";
+    }
+
+    private static String makeStatementRentalLine(String rentalMovieTitle, double amount) {
+        return "\t" + rentalMovieTitle+ "\t" + amount + "\n";
+    }
+
+    private static String makeStatementHeader(String customerName) {
+        return "Rental Record for " + customerName + "\n";
     }
 }
