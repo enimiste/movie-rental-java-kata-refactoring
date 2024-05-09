@@ -18,10 +18,10 @@ public class Rental {
     }
 
     public Movie.PriceCode moviePriceCode(){
-        return movie.getPriceCode();
+        return movie.priceCode();
     }
 
     public String movieTitle(){
-        return movie.getTitle();
+        return movie.title();
     }
 }
