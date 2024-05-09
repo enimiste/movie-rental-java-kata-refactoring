@@ -37,19 +37,19 @@ public class Customer {
             this.totalFrequentRenterPoints += frequentRenterPoints;
         }
 
-        public String getCustomerName() {
+        public String customerName() {
             return customerName;
         }
 
-        public double getTotalAmount() {
+        public double totalAmount() {
             return totalAmount;
         }
 
-        public List<RentalLine> getRentalLines() {
+        public List<RentalLine> rentalLines() {
             return Collections.unmodifiableList(rentalLines);
         }
 
-        public double getTotalFrequentRenterPoints() {
+        public int totalFrequentRenterPoints() {
             return totalFrequentRenterPoints;
         }
 
@@ -62,11 +62,11 @@ public class Customer {
                 this.amount = amount;
             }
 
-            public double getAmount() {
+            public double amount() {
                 return amount;
             }
 
-            public String getMovieTitle() {
+            public String movieTitle() {
                 return movieTitle;
             }
         }
@@ -109,14 +109,14 @@ public class Customer {
 
     public String statement() {
         Statement statement = calculateStatement();
-        String result = makeStatementHeader(statement.customerName);
+        String result = makeStatementHeader(statement.customerName());
 
-        for (Statement.RentalLine rental : statement.rentalLines) {
-            result += makeStatementRentalLine(rental.movieTitle, rental.amount);
+        for (Statement.RentalLine rental : statement.rentalLines()) {
+            result += makeStatementRentalLine(rental.movieTitle(), rental.amount());
         }
 
         // add footer lines
-        result += makeStatementFooter(statement.totalAmount, statement.totalFrequentRenterPoints);
+        result += makeStatementFooter(statement.totalAmount(), statement.totalFrequentRenterPoints());
 
         return result;
     }
