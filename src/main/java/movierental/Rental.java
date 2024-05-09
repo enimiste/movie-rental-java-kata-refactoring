@@ -13,7 +13,7 @@ public class Rental {
         this.daysRented = daysRented;
     }
 
-    public int getDaysRented() {
+    public int daysRented() {
         return daysRented;
     }
 

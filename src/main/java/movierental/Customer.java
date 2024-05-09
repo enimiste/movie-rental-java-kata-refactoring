@@ -48,26 +48,26 @@ public class Customer {
         // add frequent renter points
         int frequentRenterPoints = 1;
         // add bonus for a two days new release rental
-        if ((rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE) && rental.getDaysRented() > 1)
+        if ((rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE) && rental.daysRented() > 1)
             frequentRenterPoints++;
         return frequentRenterPoints;
     }
 
     private static double evaluateAmountForChildrensPrice(Rental rental) {
         double amount = 1.5;
-        if (rental.getDaysRented() > 3)
-            amount += (rental.getDaysRented() - 3) * 1.5;
+        if (rental.daysRented() > 3)
+            amount += (rental.daysRented() - 3) * 1.5;
         return amount;
     }
 
     private static int evaluateAmountForNewReleasePrice(Rental rental) {
-        return rental.getDaysRented() * 3;
+        return rental.daysRented() * 3;
     }
 
     private static double evaluateAmountForRegularPrice(Rental rental) {
         double amount = 2;
-        if (rental.getDaysRented() > 2)
-            amount += (rental.getDaysRented() - 2) * 1.5;
+        if (rental.daysRented() > 2)
+            amount += (rental.daysRented() - 2) * 1.5;
         return amount;
     }
 
