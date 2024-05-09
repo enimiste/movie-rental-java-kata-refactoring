@@ -87,4 +87,18 @@ public class CustomerTest {
 
         assertEquals(expected, htmlStatementPresenter.present(customer.statement()));
     }
+
+    @Test
+    public void test_html_presentation_no_rentals() {
+        Customer customer = new Customer("Bob");
+
+        HtmlStatementPresenter htmlStatementPresenter = new HtmlStatementPresenter();
+        String expected = "<h1>Rental Record for <em>Bob</em></h1>\n" +
+                "<table>\n" +
+                "</table>\n" +
+                "<p>Amount owed is <em>0.0</em></p>\n" +
+                "<p>You earned <em>0</em> frequent renter points</p>\n";
+
+        assertEquals(expected, htmlStatementPresenter.present(customer.statement()));
+    }
 }
