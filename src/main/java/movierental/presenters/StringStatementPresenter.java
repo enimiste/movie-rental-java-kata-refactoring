@@ -2,7 +2,7 @@ package movierental.presenters;
 
 import movierental.Statement;
 
-public class StringStatementPresenter implements StatementPresenter{
+public class StringStatementPresenter implements StatementPresenter {
     @Override
     public String present(Statement statement) {
         String result = makeStatementHeader(statement.customerName());
@@ -18,14 +18,13 @@ public class StringStatementPresenter implements StatementPresenter{
     }
 
 
-
     private static String makeStatementFooter(double totalAmount, int frequentRenterPoints) {
         return "Amount owed is " + totalAmount + "\n" +
                 "You earned " + frequentRenterPoints + " frequent renter points";
     }
 
     private static String makeStatementRentalLine(String rentalMovieTitle, double amount) {
-        return "\t" + rentalMovieTitle+ "\t" + amount + "\n";
+        return "\t" + rentalMovieTitle + "\t" + amount + "\n";
     }
 
     private static String makeStatementHeader(String customerName) {

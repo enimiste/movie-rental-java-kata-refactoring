@@ -24,7 +24,7 @@ public class HtmlStatementPresenter implements StatementPresenter {
     }
 
     private static String makeStatementRentalLine(String rentalMovieTitle, double amount) {
-        return "  <tr><td>" + rentalMovieTitle+ "</td><td>" + amount + "</td></tr>\n";
+        return "  <tr><td>" + rentalMovieTitle + "</td><td>" + amount + "</td></tr>\n";
     }
 
     private static String makeStatementHeader(String customerName) {

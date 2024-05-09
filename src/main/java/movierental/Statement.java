@@ -6,17 +6,17 @@ import java.util.List;
 
 public class Statement {
     private final String customerName;
-    private double totalAmount=0;
+    private double totalAmount = 0;
     private int totalFrequentRenterPoints;
-    private final List<RentalLine> rentalLines=new ArrayList<>();
+    private final List<RentalLine> rentalLines = new ArrayList<>();
 
     Statement(String customerName) {
         this.customerName = customerName;
     }
 
-    void addRentalLine(RentalLine rentalLine, int frequentRenterPoints){
+    void addRentalLine(RentalLine rentalLine, int frequentRenterPoints) {
         this.rentalLines.add(rentalLine);
-        this.totalAmount+=rentalLine.amount;
+        this.totalAmount += rentalLine.amount;
         this.totalFrequentRenterPoints += frequentRenterPoints;
     }
 

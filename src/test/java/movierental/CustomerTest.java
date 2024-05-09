@@ -1,10 +1,10 @@
 package movierental;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
 
 import movierental.presenters.HtmlStatementPresenter;
 import movierental.presenters.StringStatementPresenter;
 import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
 
 public class CustomerTest {
 
