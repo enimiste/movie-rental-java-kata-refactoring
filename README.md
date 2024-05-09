@@ -1,5 +1,7 @@
 # Movie Rental
+All my commits are prefixed by `R : ` (for refactoring action) or `F : ` (for feature action).
 
+## Description
 This source code follows Martin Fowler's book "Refactoring, Improving the Design of Existing Code".
 
 When you find you have to add a feature to a program, and the program's code is not
