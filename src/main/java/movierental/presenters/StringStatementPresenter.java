@@ -5,16 +5,17 @@ import movierental.Statement;
 public class StringStatementPresenter implements StatementPresenter {
     @Override
     public String present(Statement statement) {
-        String result = makeStatementHeader(statement.customerName());
+        StringBuilder result = new StringBuilder();
+        result.append(makeStatementHeader(statement.customerName()));
 
         for (Statement.RentalLine rental : statement.rentalLines()) {
-            result += makeStatementRentalLine(rental.movieTitle(), rental.amount());
+            result.append(makeStatementRentalLine(rental.movieTitle(), rental.amount()));
         }
 
         // add footer lines
-        result += makeStatementFooter(statement.totalAmount(), statement.totalFrequentRenterPoints());
+        result.append(makeStatementFooter(statement.totalAmount(), statement.totalFrequentRenterPoints()));
 
-        return result;
+        return result.toString();
     }
 
 
