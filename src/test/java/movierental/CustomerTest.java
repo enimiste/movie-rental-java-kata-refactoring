@@ -6,6 +6,36 @@ import org.junit.Test;
 
 public class CustomerTest {
 
+
+    @Test
+    public void test_statement_calculation() {
+        Customer customer = new Customer("Bob");
+        customer.addRental(new Rental(new Movie("Jaws", Movie.PriceCode.REGULAR), 2));
+        customer.addRental(new Rental(new Movie("Golden Eye", Movie.PriceCode.REGULAR), 3));
+        customer.addRental(new Rental(new Movie("Short New", Movie.PriceCode.NEW_RELEASE), 1));
+
+        Customer.Statement statement = customer.calculateStatement();
+        assertEquals("Bob", statement.customerName());
+        assertEquals(3, statement.rentalLines().size());
+        {
+            var rentalLine = statement.rentalLines().get(0);
+            assertEquals("Jaws", rentalLine.movieTitle());
+            assertEquals(2.0, rentalLine.amount());
+        }
+        {
+            var rentalLine = statement.rentalLines().get(1);
+            assertEquals("Golden Eye", rentalLine.movieTitle());
+            assertEquals(3.5, rentalLine.amount());
+        }
+        {
+            var rentalLine = statement.rentalLines().get(2);
+            assertEquals("Short New", rentalLine.movieTitle());
+            assertEquals(3.0, rentalLine.amount());
+        }
+        assertEquals(8.5, statement.totalAmount());
+        assertEquals(3, statement.totalFrequentRenterPoints());
+    }
+
     @Test
     public void test() {
         Customer customer = new Customer("Bob");
@@ -29,4 +59,5 @@ public class CustomerTest {
 
         assertEquals(expected, customer.statement());
     }
+
 }
