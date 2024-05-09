@@ -21,7 +21,7 @@ public class Customer {
         rentals.forEach(rental -> {
                     double thisAmount = evaluateAmount(rental);
                     int frequentRenterPoints = evaluateFrequentRenterPoints(rental);
-                    statement.addRentalLine(new Statement.RentalLine(rental.getMovie().getTitle(), thisAmount), frequentRenterPoints);
+                    statement.addRentalLine(new Statement.RentalLine(rental.movieTitle(), thisAmount), frequentRenterPoints);
                 });
         return statement;
     }
@@ -30,7 +30,7 @@ public class Customer {
         double thisAmount = 0;
 
         //determine amounts for rental line
-        switch (rental.getMovie().getPriceCode()) {
+        switch (rental.moviePriceCode()) {
             case REGULAR:
                 thisAmount = evaluateAmountForRegularPrice(rental);
                 break;
@@ -48,7 +48,7 @@ public class Customer {
         // add frequent renter points
         int frequentRenterPoints = 1;
         // add bonus for a two days new release rental
-        if ((rental.getMovie().getPriceCode() == Movie.PriceCode.NEW_RELEASE) && rental.daysRented() > 1)
+        if ((rental.moviePriceCode() == Movie.PriceCode.NEW_RELEASE) && rental.daysRented() > 1)
             frequentRenterPoints++;
         return frequentRenterPoints;
     }
