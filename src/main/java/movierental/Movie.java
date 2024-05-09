@@ -1,24 +1,23 @@
 package movierental;
 
 public class Movie {
-
-    public static final int CHILDRENS = 2;
-    public static final int NEW_RELEASE = 1;
-    public static final int REGULAR = 0;
+    public enum PriceCode {
+        CHILDRENS, NEW_RELEASE, REGULAR
+    }
 
     private String title;
-    private int priceCode;
+    private PriceCode priceCode;
 
-    public Movie(String title, int priceCode) {
+    public Movie(String title, PriceCode priceCode) {
         this.title = title;
         this.priceCode = priceCode;
     }
 
-    public int getPriceCode() {
+    public PriceCode getPriceCode() {
         return priceCode;
     }
 
-    public void setPriceCode(int arg) {
+    public void setPriceCode(PriceCode arg) {
         priceCode = arg;
     }
     public String getTitle() {
