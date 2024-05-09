@@ -5,8 +5,8 @@ public class Movie {
         CHILDRENS, NEW_RELEASE, REGULAR
     }
 
-    private String title;
-    private PriceCode priceCode;
+    private final String title;
+    private final PriceCode priceCode;
 
     public Movie(String title, PriceCode priceCode) {
         this.title = title;
@@ -17,9 +17,6 @@ public class Movie {
         return priceCode;
     }
 
-    public void setPriceCode(PriceCode arg) {
-        priceCode = arg;
-    }
     public String getTitle() {
         return title;
     }
