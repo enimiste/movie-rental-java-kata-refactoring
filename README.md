@@ -47,3 +47,7 @@ Unit tests can be run using maven[1]:
 [1]: http://maven.apache.org/
 
 Tests are located in the test directory and run using Junit.
+
+## Sources :
+https://gitlab.com/azae/craft/movie-rental/movie-rental-java
+https://codingdojo.org/kata/movie-rental/
